@@ -247,7 +247,11 @@ public class SPDParser {
                 node.setTrueNode(newNode);
             }
             else if(context.parent.optionStatus == Context.OptionStatus.Else){
-                node.setFalseNode(newNode);
+                if(node.getFalseNode() == null){
+                    node.setFalseNode(newNode);
+                }else{
+                    throw new UnexpectedElseException();
+                }
             }
             else {
                 throw new UnexpectedInnerExpection("Illegal option status");
